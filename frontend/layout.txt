@@ -1,0 +1,96 @@
+//query db
+--trackingNumber
+--customerId
+--status(default=submitted) Submitted,Processing,Resolved,Respond,Customer Respond
+--notes
+--attachement
+
+//query message db
+--queryId
+--senderId
+--senderType
+--message
+--attachement
+
+//status history
+--query id
+--old status
+--new status
+--changed by
+
+--customer create a query with his tracking number , notes and attachement
+--admin receive the query with notes and attachement when admin change the status to respond the admin can respond and then customer can add another respond
+
+----controller
+--new query ./
+--change status ./
+--admin send respond ./
+--customer send respond ./
+--view all queries of admin ./
+--view all queries of user ./
+--view history for admin
+
+--Notification Table
+id
+userId
+sendBy
+type
+message
+read or unread
+
+admin changes data entry is made in notification Table
+user gets updated with notification count
+when user click on notification icon he can see notifi.
+he can mark the message as read and the style will get changed accordingly
+when the user mark it as read he will get option to mark it as unread
+
+//payments
+id
+payment_status
+transaction_id
+amount
+userId
+invoice id
+type
+gateway_response
+paid_at
+
+invoice gets created user can view his invoices --Done
+he gets option to pay and when he clicks on pay he gets redirected to payment page
+after the payment is completed his invoice is set to paid
+
+--admin
+admin can see the remaining invoices
+if the user has paid manually to the admin then he can set it as paid manually and the invoice status will get set to paid
+
+
+//create a payment intent
+--get the details like invoiceId and amount from req.body
+--create a payment intent and return that intent to frontend
+
+create a stripe payment
+
+//credentials
+
+Name	Ramiro Legros
+Username	ramiro.legros27@ethereal.email – this account can not be used for inbound emails 
+Password	gBnSsnfSVDRaTeVmbJ
+
+//schedule delivery flow
+--admin marks package as delivered to warehouse
+--user will see a option to enter his delivery details like name and address and after entering that details the admin will see them and generate a final invoice which will include package charge + delivery charge and after the invoice is generated the user will see the the payment option and after the payment the package will be marked as ready to deliver and after that the admin can mark it as deivered to customer
+
+--routes
+--a page where admin can see all the packages whose deivery has been schedules ./
+--admin can geerate invoices of that packages 
+--user sees that invoices and can pay
+--after payment the package is marked as ready for dispatch
+--admin can marked it as deiver
+
+--when admin clicks on genrate invoice the package data is been sent to invoice generator route (packageid) -> inv data
+--send that inv data to pdfDownload link 
+--in invoices tab remove invoice creation and just display the payment details and rename it to payments
+--user will get that invoice
+
+--get all invoices
+--match it with packages 
