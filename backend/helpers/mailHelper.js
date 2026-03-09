@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
-import { mailHTMLTemplate } from "../template/mailTemplate.js";
-
+import fs from "fs"
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 export const mailHelper = async (user, age) => {
     const transporter = nodemailer.createTransport({
         host: "smtp.ethereal.email",
@@ -11,7 +14,8 @@ export const mailHelper = async (user, age) => {
         },
     });
 
-    const htmlContent=mailHTMLTemplate({age,receiverName:user.name})
+    let htmlContent=fs.readFileSync(path.join(__dirname,'../template/mailTemplate.html'),"utf-8")
+	htmlContent=htmlContent.replace("{receiverName}",user.name).replaceAll("{age}",age)
 
     try {
         const info = await transporter.sendMail({
